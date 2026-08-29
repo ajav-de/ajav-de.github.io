@@ -1,11 +1,326 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Hello!</h1>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Javillo AD. | Portfolio</title>
+    <meta name="description" content="Portfolio of Althea Denielle M. Javillo — Aspiring Data Scientist and UI Designer." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Micro+5+Charted&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <!-- TOP HEADER -->
+    <header id="mainHeader" class="fixed-top">
+      <div class="header-container">
+        <a id="brandLogoLink" href="#" class="brand-logo" aria-label="Javillo Portfolio">
+          <span>JAVILLO</span>
+          <span class="brand-subtext"> PORTFOLIO </span>
+        </a>
+        <!--LINKS FOR EACH SECTION-->
+        <nav class="nav-pill" aria-label="Main Navigation">
+          <a href="#" class="nav-link-active"> HOME </a>
+          <span class="nav-divider">|</span>
+          <a href="#bentoSection" class="nav-link"> ABOUT ME </a>
+          <span class="nav-divider">|</span>
+          <a id="navProjectsLink" href="#featuredDrop" class="nav-link"> PROJECTS </a>
+          <span class="nav-divider">|</span>
+          <a id="navAchievementsLink" href="#featuredDrop" class="nav-link"> ACHIEVEMENTS </a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <!-- FIRST SECTION SCROLL EFFECT -->
+      <section id="heroScrollContainer" class="hero-scroll-base">
+        <div class="sticky-stage">
+          <div class="centered-stage">
+            <div id="heroShoeWrapper" class="hero-shoe-inner">
+              <img src="images/img0.png" alt="Showcase 1" class="hero-shoe-image hero-shoe-image--visible" loading="eager" />
+              <img src="images/img2.jpg" alt="Showcase 2" class="hero-shoe-image hero-shoe-image--hidden" loading="eager" />
+              <img src="images/img4.jpg" alt="Showcase 4" class="hero-shoe-image hero-shoe-image--hidden" loading="eager" />
+              <img src="images/img6.jpg" alt="Showcase 6" class="hero-shoe-image hero-shoe-image--hidden" loading="eager" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT ME SECTION DETAILS -->
+      <section id="bentoSection" class="section-base">
+        <div class="bento-grid">
+          <div class="bento-column bento-column-bordered">
+            <div class="bento-narrative-card">
+              <div>
+                <div class="bento-header-row">
+                  <span class="subcard-label"> ABOUT ME </span>
+                </div>
+                <h2 class="bento-heading">ALTHEA DENIELLE JAVILLO</h2>
+                <p class="bento-description">
+                  Aspiring Data Scientist/Engineer and UI Designer. Building skills that coagulate both data and design to create high-language models for non-technical and efficient data analysis.
+                </p>
+                <!--LINKS IN HERE-->
+                <div class="social-connect-strip">
+                  <span class="social-connect-label"> CONNECT </span>
+                  <div class="social-connect-buttons">
+                    <a href="https://www.linkedin.com/in/althea-denielle-m-javillo" target="_blank" rel="noopener noreferrer" class="social-btn">LINKEDIN</a>
+                    <a href="https://github.com/ajav-de" target="_blank" rel="noopener noreferrer" class="social-btn">GITHUB</a>
+                    <a href="https://www.instagram.com/aljavillo?igsi=aGx6NTZyOW84b3N4" target="_blank" rel="noopener noreferrer" class="social-btn">INSTAGRAM</a>
+                    <a href="https://www.facebook.com/alt.javillo/" target="_blank" rel="noopener noreferrer" class="social-btn">FACEBOOK</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ABOUT ME SECTION PHOTO -->
+          <div class="bento-column">
+            <div class="editorial-shot">
+              <img src="images/img0.png" alt="Althea Denielle M. Javillo" class="editorial-img" loading="lazy" />
+              <div class="editorial-bottom-strip">
+                <span class="subcard-label" style="color: #fff;">JAVILLO // ARCHIVE</span>
+                <span class="editorial-edition-pill">PORTFOLIO '26</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--quote so that divider is not empty-->
+        <div class="section-footer-bar">
+          <span class="mantra-quote">"Keep moving forward."</span>
+        </div>
+      </section>
+
+      <!-- FEATURES PROJECTS, ACHIEVEMENTS, EXPERIENCES -->
+      <section id="featuredDrop" class="section-featured">
+        <div class="section-inner-container">
+          <div class="section-header-flex">
+            <div>
+              <span id="releaseBadge" class="subcard-label"> WEB DEV PROJECTS </span>
+              <h2 id="releaseHeading" class="section-title">Selected Projects & UI Works</h2>
+            </div>
+            <div class="section-actions-group">
+              <button id="reservePairBtn" class="shop-action-primary" aria-label="Web Dev Projects">web dev projects</button>
+              <button id="achievementsToggleBtn" class="achievements-toggle-btn" aria-label="Achievements">Achievements</button>
+            </div>
+          </div>
+
+          <!-- WEB DEV PROJECT CARDS -->
+           <!--FASHION BLOG-->
+          <div id="colorwaysDeck" class="product-cards-grid">
+            <a href="https://ajav-de.github.io/Activity/Fashion/fashionblog.html" target="_blank" rel="noopener noreferrer" class="product-card" aria-label="Fashion Blog">
+              <div class="product-media-box">
+                <img src="images/fashion.png" onerror="this.onerror=null;this.src='images/fashion.png'" alt="Fashion Blog" class="product-img" loading="lazy" />
+              </div>
+              <div class="product-info-flex">
+                <div>
+                  <h3 class="product-title">Fashion Blog</h3>
+                  <p class="product-meta">Beginner layouting and source inputs.</p>
+                </div>
+                <div class="product-price-box">
+                  <span class="price-member">VIEW PROJECT →</span>
+                </div>
+              </div>
+            </a>
+            <!--WINEFES-->
+            <a href="https://ajav-de.github.io/1.2-WineFes/" target="_blank" rel="noopener noreferrer" class="product-card" aria-label="Wine Festival">
+              <div class="product-media-box">
+                <img src="images/winefes.png" onerror="this.onerror=null;this.src='images/winefes.png'" alt="Wine Festival" class="product-img" loading="lazy" />
+              </div>
+              <div class="product-info-flex">
+                <div>
+                  <h3 class="product-title">Wine Festival</h3>
+                  <p class="product-meta">Responsive UI with Table Implementation.</p>
+                </div>
+                <div class="product-price-box">
+                  <span class="price-member">VIEW PROJECT →</span>
+                </div>
+              </div>
+            </a>
+            <!--DAVIES BURGERS-->
+            <a href="https://ajav-de.github.io/DaviesBurgers/" target="_blank" rel="noopener noreferrer" class="product-card" aria-label="Davies Burgers">
+              <div class="product-media-box">
+                <img src="images/burgers.png" onerror="this.onerror=null;this.src='/3.png'" alt="Davies Burgers" class="product-img" loading="lazy" />
+              </div>
+              <div class="product-info-flex">
+                <div>
+                  <h3 class="product-title">Davies Burgers</h3>
+                  <p class="product-meta">Application of CSS Animations and Previous Applications.</p>
+                </div>
+                <div class="product-price-box">
+                  <span class="price-member">VIEW PROJECT →</span>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- ACHIEVEMENTS AND EXPERIENCES -->
+          <div id="achievementsDeck" class="achievements-deck-container hidden">
+            <!--ARROWHEAD PREVIOUS-->
+            <button id="achievePrevBtn" class="carousel-nav-btn carousel-prev-btn" aria-label="Previous">
+              ←
+            </button> 
+            <!--ARROWHEAD NEXT-->
+            <button id="achieveNextBtn" class="carousel-nav-btn carousel-next-btn" aria-label="Next">
+              →
+            </button>
+
+            <div class="achievements-viewport">
+              <div id="achievementsTrack" class="achievements-track">
+                
+                <!-- COURSERA NOTE: FIND ONLINE UPLOADER AND GET LINK TO UPLOAD MORE CERTS INSTEAD OF ONE-->
+                <a href="https://coursera.org/share/fabe6fddd33e7663065924f60509133e" target="_blank" rel="noopener noreferrer" class="achievement-card" aria-label="Coursera Certification">
+                  <div class="achievement-media">
+                    <img src="images/certificates.png" onerror="this.onerror=null;this.src='images/certificates.png'" alt="Coursera Certification" loading="lazy" />
+                    <span class="achievement-badge">CERTIFICATE</span>
+                  </div>
+                  <div class="achievement-details">
+                    <div class="achievement-meta-row">
+                      <span>STILL PURSUING</span>
+                    </div>
+                    <h3 class="achievement-title">Coursera Credentials</h3>
+                    <p class="achievement-desc">Certified completion of professional coursework in IBM, Google, and DeepLearning.AI's data analytics and machine learning courses.</p>
+                  </div>
+                  <div class="achievement-footer-flex">
+                    <span>VIEW CREDENTIAL</span>
+                    <span>COURSERA →</span>
+                  </div>
+                </a>
+
+                <!-- GLOBE KADAYAWAN EVENT -->
+                <a href="https://www.facebook.com/20531316728/posts/10154009990506729/" target="_blank" rel="noopener noreferrer" class="achievement-card" aria-label="Facebook Recognition Post">
+                  <div class="achievement-media">
+                    <img src="images/globe.jpg" onerror="this.onerror=null;this.src='images/globe.jpg'" alt="Milestone Feature" loading="lazy" />
+                    <span class="achievement-badge">SCHOOL EVENTS</span>
+                  </div>
+                  <div class="achievement-details">
+                    <div class="achievement-meta-row">
+                      <span>AUGUST 11, 2026</span>
+                    </div>
+                    <h3 class="achievement-title">Globe Kadayawan Mural Contest</h3>
+                    <p class="achievement-desc">Featured participation celebrating the integration of AI and newer tech through art for a 5G-Forward Future.</p>
+                  </div>
+                  <div class="achievement-footer-flex">
+                    <span>VIEW POST</span>
+                    <span>FACEBOOK →</span>
+                  </div>
+                </a>
+
+                <!-- EXTERNAL ORGS -->
+                <a href="https://www.facebook.com/20531316728/posts/10154009990506729/" target="_blank" rel="noopener noreferrer" class="achievement-card" aria-label="Facebook Milestone Event">
+                  <div class="achievement-media">
+                    <img src="images/club.jpg" onerror="this.onerror=null;this.src='images/club.jpg'" alt="Community Milestone" loading="lazy" />
+                    <span class="achievement-badge">ARTS</span>
+                  </div>
+                  <div class="achievement-details">
+                    <div class="achievement-meta-row">
+                      <span>JUNE 29, 2025</span>
+                    </div>
+                    <h3 class="achievement-title">Hainan Sorbet X Studio Ghibli</h3>
+                    <p class="achievement-desc">Creative and technical collaborations to celebrate Studio Ghibli.</p>
+                  </div>
+                  <div class="achievement-footer-flex">
+                    <span>VIEW POST</span>
+                    <span>FACEBOOK →</span>
+                  </div>
+                </a>
+
+                <!-- HAPPY SYNTHESIZER NO LINK ONLY VIDEO LOOP -->
+                <div class="achievement-card">
+                  <div class="achievement-media">
+                    <video autoplay loop muted playsinline onclick="this.paused?this.play():this.pause()" title="Click to Pause / Play">
+                      <source src="images/video.mp4" type="video/mp4">
+                    </video>
+                    <span class="achievement-badge">EXTRA</span>
+                  </div>
+                  <div class="achievement-details">
+                    <div class="achievement-meta-row">
+                      <span>IN PROGRESS</span>
+                    </div>
+                    <h3 class="achievement-title">HAPPY SYNTHESIZER</h3>
+                    <p class="achievement-desc">Virtual synthesizer with hand tracking. Uses tone.js for the audio framework and Google MediaPipe for tracking.</p>
+                  </div>
+                  <div class="achievement-footer-flex">
+                    <span>CLICK VIDEO TO PAUSE/PLAY</span>
+                    <span>DEMO REEL ↺</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div id="achieveDots" class="carousel-dots-wrap" aria-hidden="true"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- WHAT'S MY GOAL? -->
+      <section id="storySection" class="section-story">
+        <div class="story-grid">
+          <div>
+            <span class="subcard-label"> MY GOAL </span>
+            <h2 class="story-title">project focus</h2>
+          </div>
+          <div class="story-content">
+            <p>
+                Without data, the world will shut its eyes. With too much data, it's the same also.
+
+            </p>
+            <p>
+                I want to bridge the boundary between data science intelligence and bespoke interface design. Exploring creative computation and exploratory visual analytics. I want to make information, data gathering, and creating more accessible with better applications of LLMs and AIs.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER GRADIENT HUZZAH -->
+      <div class="pre-footer-gradient-wrap" aria-hidden="true">
+        <div id="footerGradientGlow" class="pre-footer-gradient-glow">
+          <div class="pre-footer-ambient-beams"></div>
+        </div>
+      </div>
+    </main>
+
+    <!-- FOOTER HUZZAH -->
+    <footer id="footerSection" class="footer-base">
+      <div class="footer-inner-container">
+        <div class="footer-middle-columns">
+          <div class="footer-col">
+            <h4 class="footer-brand-heading">JAVILLO, ALTHEA DENIELLE</h4>
+            <p class="subcard-text" style="color: rgba(255, 255, 255, 0.85);">
+              Data Science & UI Architecture Explorer
+            </p>
+            <span class="footer-col-label">EST. 2026 | OPEN FOR COLLABORATION</span>
+          </div>
+
+          <div class="footer-col">
+            <span class="footer-col-label"> NAVIGATION </span>
+            <a href="#" class="footer-nav-link">|| HOME</a>
+            <a href="#bentoSection" class="footer-nav-link">|| ABOUT ME</a>
+            <a href="#featuredDrop" class="footer-nav-link">|| PROJECTS & ACHIEVEMENTS</a>
+          </div>
+
+          <div class="footer-col">
+            <span class="footer-col-label">"Around here, however, we don't look backwards for very long. We keep moving forward, opening up new doors and doing new things, because we're curious… and curiosity keeps leading us down new paths."</span>
+            <p class="subcard-text" style="color: rgba(255, 255, 255, 0.85);">
+            </p>
+          </div>
+        </div>
+
+        <div class="footer-bottom-flex">
+          <div>© 2026 JAVILLO, AD</div>
+          <div class="footer-social-links">
+            <a href="https://www.linkedin.com/in/althea-denielle-m-javillo" target="_blank" rel="noopener noreferrer">LINKEDIN</a>
+            <span>/</span>
+            <a href="https://www.facebook.com/alt.javillo/" target="_blank" rel="noopener noreferrer">FACEBOOK</a>
+            <span>/</span>
+            <a href="https://www.instagram.com/aljavillo?igsi=aGx6NTZyOW84b3N4" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
+            <span>/</span>
+            <a href="https://github.com/ajav-de" target="_blank" rel="noopener noreferrer">GITHUB</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div id="globalToast" class="toast-hidden" role="status" aria-live="polite"></div>
+    <script type="module" src="/main.js"></script>
+  </body>
 </html>
