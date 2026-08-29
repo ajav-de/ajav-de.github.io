@@ -34,11 +34,8 @@ WEBDEV PROJECTS
 
 ACHIEVEMENTS 
   - Card 1 Coursera Certificate
-https://coursera.org/share/fabe6fddd33e7663065924f60509133e
   - Card 2 Globe Kadayawan
-https://www.facebook.com/20531316728/posts/10154009990506729/
   - Card 3 Hainan Sorbet
- https://www.facebook.com/20531316728/posts/10154009990506729/
   - Card 4 Happy Synthesizer: Self-contained video player with no external link.
     Supports instant click-to-pause and click-to-play toggle when you use picture-in-picture.
     Each card displays the date or status, and displays other activities I've done outside the webdev course.
