@@ -48,8 +48,8 @@ SOCIALS
   - Facebook: https://www.facebook.com/alt.javillo/
 
 ERROR HANDLING
-- Fixed missing placeholder media errors ("The element has no supported sources." / "Unexpected token '<'"):
+- Fixed missing link errors ("Unsupported/Private"):
 - Created static fallback assets in `/public` directory (`img.png`, `video.mp4`, and `images/`).
 - Updated script tag to modern module syntax: `<script type="module" src="/main.js"></script>`.
-- Added video error listeners in `main.js` for graceful handling if a custom video is missing.
+- Added video error listeners in `main.js` for error handling if a custom video is missing.
 
