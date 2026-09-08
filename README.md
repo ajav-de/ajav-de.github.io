@@ -42,10 +42,7 @@ ACHIEVEMENTS
 
 SOCIALS
 - Connected About Me social buttons to live profiles:
-  - LinkedIn: https://www.linkedin.com/in/althea-denielle-m-javillo
-  -  GitHub: https://github.com/ajav-de
-  - Instagram: https://www.instagram.com/aljavillo?igsi=aGx6NTZyOW84b3N4
-  - Facebook: https://www.facebook.com/alt.javillo/
+  LinkedIn, Instagram, Facebook, GitHub
 
 ERROR HANDLING
 - Fixed missing link errors ("Unsupported/Private"):
