@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", () => {
   const heroContainer = document.getElementById("heroScrollContainer");
   const heroShoeWrapper = document.getElementById("heroShoeWrapper");
@@ -14,16 +13,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const releaseHeading = document.getElementById("releaseHeading");
   const colorwaysDeck = document.getElementById("colorwaysDeck");
   const achievementsDeck = document.getElementById("achievementsDeck");
+
+  // Achievements carousel refs
   const achievePrevBtn = document.getElementById("achievePrevBtn");
   const achieveNextBtn = document.getElementById("achieveNextBtn");
   const achievementsTrack = document.getElementById("achievementsTrack");
   const achieveDots = document.getElementById("achieveDots");
 
+  // Projects carousel refs
+  const projectsPrevBtn = document.getElementById("projectsPrevBtn");
+  const projectsNextBtn = document.getElementById("projectsNextBtn");
+  const projectsTrack = document.getElementById("projectsTrack");
+  const projectsDots = document.getElementById("projectsDots");
+
   let toastTimer = null;
-  let carouselIndex = 0;
-  let maxCarouselIndex = 0;
-  const achievementCards = achievementsTrack ? Array.from(achievementsTrack.querySelectorAll(".achievement-card")) : [];
-  const totalCards = achievementCards.length;
 
   // NOTIF ADDITIONAL WHEN YOU CLICK TO VIEW A FUNCTION
   function showToast(msg) {
@@ -88,9 +91,132 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }, { passive: true });
 
-  // FOR SWITCHING IN PROJECTS AND ACHIEVEMENTS
+  // =========================================
+  // SHARED CAROUSEL FACTORY
+  // =========================================
+  function createCarousel({ track, dots, prevBtn, nextBtn, cardSelector }) {
+    const cards = track ? Array.from(track.querySelectorAll(cardSelector)) : [];
+    const total = cards.length;
+    let index = 0;
+    let maxIndex = 0;
+
+    function getCardsPerView() {
+      const w = window.innerWidth;
+      return w >= 1024 ? 3 : w >= 640 ? 2 : 1;
+    }
+
+    function renderDots() {
+      if (!dots) return;
+      dots.innerHTML = "";
+      for (let i = 0; i <= maxIndex; i++) {
+        const dot = document.createElement("button");
+        dot.className = `carousel-dot ${i === index ? "active" : ""}`;
+        dot.setAttribute("aria-label", `Slide ${i + 1}`);
+        dot.addEventListener("click", () => {
+          index = i;
+          apply();
+        });
+        dots.appendChild(dot);
+      }
+    }
+
+    function apply() {
+      if (!track || !cards.length) return;
+      const cardWidth = cards[0].getBoundingClientRect().width;
+      const gap = 24;
+      track.style.transform = `translateX(-${index * (cardWidth + gap)}px)`;
+
+      if (dots) {
+        dots.querySelectorAll(".carousel-dot").forEach((d, idx) => {
+          d.classList.toggle("active", idx === index);
+        });
+      }
+    }
+
+    function update() {
+      const perView = getCardsPerView();
+      maxIndex = Math.max(0, total - perView);
+      index = Math.min(index, maxIndex);
+      renderDots();
+      apply();
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", () => {
+        index = index > 0 ? index - 1 : maxIndex;
+        apply();
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener("click", () => {
+        index = index < maxIndex ? index + 1 : 0;
+        apply();
+      });
+    }
+
+    // Swipe + drag
+    let startX = 0;
+    let isDown = false;
+
+    track?.addEventListener("touchstart", e => {
+      startX = e.touches[0].clientX;
+    }, { passive: true });
+
+    track?.addEventListener("touchend", e => {
+      const diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) {
+        if (diff > 0) index = index < maxIndex ? index + 1 : 0;
+        else index = index > 0 ? index - 1 : maxIndex;
+        apply();
+      }
+    });
+
+    track?.addEventListener("mousedown", e => {
+      isDown = true;
+      startX = e.clientX;
+    });
+
+    window.addEventListener("mouseup", e => {
+      if (!isDown) return;
+      isDown = false;
+      const diff = startX - e.clientX;
+      if (Math.abs(diff) > 45) {
+        if (diff > 0) index = index < maxIndex ? index + 1 : 0;
+        else index = index > 0 ? index - 1 : maxIndex;
+        apply();
+      }
+    });
+
+    return { update };
+  }
+
+  // Instantiate both carousels with the same factory
+  const achievementsCarousel = createCarousel({
+    track: achievementsTrack,
+    dots: achieveDots,
+    prevBtn: achievePrevBtn,
+    nextBtn: achieveNextBtn,
+    cardSelector: ".achievement-card"
+  });
+
+  const projectsCarousel = createCarousel({
+    track: projectsTrack,
+    dots: projectsDots,
+    prevBtn: projectsPrevBtn,
+    nextBtn: projectsNextBtn,
+    cardSelector: ".achievement-card"
+  });
+
+  // Thin wrappers so existing tab functions keep working unchanged
+  function updateCarousel() { achievementsCarousel.update(); }
+  function updateProjectsCarousel() { projectsCarousel.update(); }
+
+  // =========================================
+  // TAB SWITCHING
+  // =========================================
   function showProjectsTab(notify = true) {
-    if (colorwaysDeck) colorwaysDeck.style.display = "grid";
+    if (colorwaysDeck) colorwaysDeck.classList.remove("hidden");
     if (achievementsDeck) achievementsDeck.classList.add("hidden");
     if (reservePairBtn) {
       reservePairBtn.classList.remove("inactive");
@@ -100,10 +226,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (releaseBadge) releaseBadge.textContent = "[ WEB DEV PROJECTS ]";
     if (releaseHeading) releaseHeading.textContent = "Selected Projects & UI Works";
     if (notify) showToast("SHOWCASING WEB DEV & UI PROJECTS");
+    setTimeout(updateProjectsCarousel, 40);
   }
 
   function showAchievementsTab(notify = true) {
-    if (colorwaysDeck) colorwaysDeck.style.display = "none";
+    if (colorwaysDeck) colorwaysDeck.classList.add("hidden");
     if (achievementsDeck) achievementsDeck.classList.remove("hidden");
     if (reservePairBtn) {
       reservePairBtn.classList.add("inactive");
@@ -143,7 +270,8 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("featuredDrop")?.scrollIntoView({ behavior: "smooth" });
   });
 
-  // CLICKING CARD
+  // CLICKING CARD (product-card is no longer used in projects,
+  // but this guard keeps it safe if used elsewhere)
   document.querySelectorAll(".product-card").forEach(card => {
     card.addEventListener("click", () => {
       const title = card.querySelector(".product-title")?.textContent || "PROJECT";
@@ -151,7 +279,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // AMOOTH ANCHORING
+  // SMOOTH ANCHORING
   document.querySelectorAll("a[href^='#']").forEach(link => {
     if (["navProjectsLink", "navAchievementsLink"].includes(link.id)) return;
     link.addEventListener("click", (e) => {
@@ -177,102 +305,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // ACHIEVEMENT CARDS
-  function getCardsPerView() {
-    const w = window.innerWidth;
-    return w >= 1024 ? 3 : w >= 640 ? 2 : 1;
-  }
-
-  function updateCarousel() {
-    const perView = getCardsPerView();
-    maxCarouselIndex = Math.max(0, totalCards - perView);
-    carouselIndex = Math.min(carouselIndex, maxCarouselIndex);
-    renderDots();
-    applyCarousel();
-  }
-
-  function renderDots() {
-    if (!achieveDots) return;
-    achieveDots.innerHTML = "";
-    for (let i = 0; i <= maxCarouselIndex; i++) {
-      const dot = document.createElement("button");
-      dot.className = `carousel-dot ${i === carouselIndex ? "active" : ""}`;
-      dot.setAttribute("aria-label", `Slide ${i + 1}`);
-      dot.addEventListener("click", () => {
-        carouselIndex = i;
-        applyCarousel();
-      });
-      achieveDots.appendChild(dot);
-    }
-  }
-
-  function applyCarousel() {
-    if (!achievementsTrack || !achievementCards.length) return;
-    const cardWidth = achievementCards[0].getBoundingClientRect().width;
-    const gap = 24;
-    achievementsTrack.style.transform = `translateX(-${carouselIndex * (cardWidth + gap)}px)`;
-
-    if (achieveDots) {
-      achieveDots.querySelectorAll(".carousel-dot").forEach((d, idx) => {
-        d.classList.toggle("active", idx === carouselIndex);
-      });
-    }
-  }
-
-  if (achievePrevBtn) {
-    achievePrevBtn.addEventListener("click", () => {
-      carouselIndex = carouselIndex > 0 ? carouselIndex - 1 : maxCarouselIndex;
-      applyCarousel();
-    });
-  }
-
-  if (achieveNextBtn) {
-    achieveNextBtn.addEventListener("click", () => {
-      carouselIndex = carouselIndex < maxCarouselIndex ? carouselIndex + 1 : 0;
-      applyCarousel();
-    });
-  }
-
-  // TOUCH SWIPRE AND DRAG FOR THE CARDS
-  let startX = 0;
-  let isDown = false;
-
-  achievementsTrack?.addEventListener("touchstart", e => {
-    startX = e.touches[0].clientX;
-  }, { passive: true });
-
-  achievementsTrack?.addEventListener("touchend", e => {
-    const diff = startX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) {
-      if (diff > 0) carouselIndex = carouselIndex < maxCarouselIndex ? carouselIndex + 1 : 0;
-      else carouselIndex = carouselIndex > 0 ? carouselIndex - 1 : maxCarouselIndex;
-      applyCarousel();
-    }
-  });
-
-  achievementsTrack?.addEventListener("mousedown", e => {
-    isDown = true;
-    startX = e.clientX;
-  });
-
-  window.addEventListener("mouseup", e => {
-    if (!isDown) return;
-    isDown = false;
-    const diff = startX - e.clientX;
-    if (Math.abs(diff) > 45) {
-      if (diff > 0) carouselIndex = carouselIndex < maxCarouselIndex ? carouselIndex + 1 : 0;
-      else carouselIndex = carouselIndex > 0 ? carouselIndex - 1 : maxCarouselIndex;
-      applyCarousel();
-    }
-  });
-
   window.addEventListener("resize", () => {
     onScroll();
     updateCarousel();
+    updateProjectsCarousel();
   }, { passive: true });
 
   // Init
   onScroll();
   showProjectsTab(false);
   updateCarousel();
+  updateProjectsCarousel();
 });
